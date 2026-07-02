@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统管理后台 - 数据初始化</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1f2e 0%, #242b3d 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        .header {
+            background: rgba(30, 35, 50, 0.95);
+            border-bottom: 1px solid rgba(110, 158, 247, 0.15);
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #6E9EF7, #5DAF5A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header a {
+            color: #8fb4f7;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 16px;
+            border: 1px solid rgba(110, 158, 247, 0.25);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .header a:hover { background: rgba(110, 158, 247, 0.1); }
+        .container { max-width: 960px; margin: 32px auto; padding: 0 24px; }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: rgba(30, 35, 50, 0.8);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            border-color: rgba(110, 158, 247, 0.3);
+            transform: translateY(-2px);
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #6E9EF7;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #909399;
+        }
+
+        /* Action Panel */
+        .panel {
+            background: rgba(30, 35, 50, 0.8);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        .panel-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 12px; }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #6E9EF7, #5B8FF9);
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(110, 158, 247, 0.3); }
+        .btn-success {
+            background: linear-gradient(135deg, #5DAF5A, #4CAF50);
+            color: white;
+        }
+        .btn-success:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(93, 175, 90, 0.3); }
+        .btn-warning {
+            background: linear-gradient(135deg, #F5A623, #FF9800);
+            color: white;
+        }
+        .btn-warning:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245, 166, 35, 0.3); }
+        .btn-danger {
+            background: linear-gradient(135deg, #F56C6C, #FF4D4D);
+            color: white;
+        }
+        .btn-danger:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245, 108, 108, 0.3); }
+
+        /* Messages */
+        .messages { margin-bottom: 24px; }
+        .message {
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            animation: slideIn 0.3s ease-out;
+        }
+        .message.success { background: rgba(93, 175, 90, 0.15); border-left: 4px solid #5DAF5A; color: #95d992; }
+        .message.error { background: rgba(245, 108, 108, 0.15); border-left: 4px solid #F56C6C; color: #f89898; }
+        .message.warning { background: rgba(245, 166, 35, 0.15); border-left: 4px solid #F5A623; color: #f5c562; }
+        .message.info { background: rgba(110, 158, 247, 0.15); border-left: 4px solid #6E9EF7; color: #8fb4f7; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Description */
+        .desc {
+            color: #909399;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-top: 16px;
+            padding: 14px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+        .desc strong { color: #c0c4cc; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: #606266;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>系统管理后台</h1>
+        <a href="/">返回首页</a>
+    </div>
+
+    <div class="container">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- 系统数据统计 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.materials }}</div>
+                <div class="stat-label">物料总数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.suppliers }}</div>
+                <div class="stat-label">供应商数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.customers }}</div>
+                <div class="stat-label">客户数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.inventories }}</div>
+                <div class="stat-label">库存记录</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.sales_orders }}</div>
+                <div class="stat-label">销售订单</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.purchase_orders }}</div>
+                <div class="stat-label">采购订单</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.boms }}</div>
+                <div class="stat-label">BOM记录</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.workcenters }}</div>
+                <div class="stat-label">工作中心</div>
+            </div>
+        </div>
+
+        <!-- 数据初始化操作 -->
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="panel">
+                <div class="panel-title">数据初始化操作</div>
+                <div class="btn-group">
+                    <button type="submit" name="init_type" value="all" class="btn btn-danger">
+                        全部初始化
+                    </button>
+                    <button type="submit" name="init_type" value="demo_data" class="btn btn-success">
+                        演示数据（含BOM+库存）
+                    </button>
+                    <button type="submit" name="init_type" value="calendar" class="btn btn-primary">
+                        工厂日历
+                    </button>
+                    <button type="submit" name="init_type" value="workcenter" class="btn btn-warning">
+                        工作中心
+                    </button>
+                </div>
+                <div class="desc">
+                    <strong>全部初始化：</strong>重置工厂日历 + 工作中心 + 演示数据（物料、供应商、客户、BOM、库存、订单）<br>
+                    <strong>演示数据：</strong>仅初始化业务数据，包含完整的BOM清单和充足库存<br>
+                    <strong>注意：</strong>初始化操作会清空并重建相关数据，请谨慎操作
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="footer">
+        联宝智能供应链管理系统 v1.0 &copy; {{ request.user.username }}
+    </div>
+</body>
+</html>

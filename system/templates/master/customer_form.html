@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}客户表单{% endblock %}
+{% block content %}
+<div class="container-fluid mt-3">
+  <h4>客户表单</h4>
+  <div class="alert alert-info">此页面由Vue3前端渲染，如看到此说明请通过前端访问</div>
+  <div class="card mt-3"><div class="card-body">
+    <form method="post">{% csrf_token %}
+      <div class="mb-3"><label>客户编码</label><input name="code" class="form-control"></div>
+      <div class="mb-3"><label>客户名称</label><input name="name" class="form-control"></div>
+      <div class="mb-3"><label>联系人</label><input name="contact_person" class="form-control"></div>
+      <div class="mb-3"><label>联系电话</label><input name="phone" class="form-control"></div>
+      <div class="mb-3"><label>地址</label><input name="address" class="form-control"></div>
+      <button type="submit" class="btn btn-primary">保存</button>
+    </form>
+  </div></div>
+</div>
+{% endblock %}

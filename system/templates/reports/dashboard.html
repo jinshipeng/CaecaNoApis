@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}报表中心首页{% endblock %}
+{% block content %}
+<div class="container-fluid mt-3">
+  <h4>报表中心首页</h4>
+  <div class="alert alert-info">此页面由Vue3前端渲染，如看到此说明请通过前端访问</div>
+  <div class="row mt-3">
+    <div class="col-md-3 mb-3"><div class="card h-100"><div class="card-body text-center"><h5>库存周转报表</h5><p class="text-muted">查看库存周转数据</p></div></div></div>
+    <div class="col-md-3 mb-3"><div class="card h-100"><div class="card-body text-center"><h5>订单交付报表</h5><p class="text-muted">查看订单交付情况</p></div></div></div>
+    <div class="col-md-3 mb-3"><div class="card h-100"><div class="card-body text-center"><h5>供应商绩效报表</h5><p class="text-muted">查看供应商绩效</p></div></div></div>
+    <div class="col-md-3 mb-3"><div class="card h-100"><div class="card-body text-center"><h5>产能分析报表</h5><p class="text-muted">查看产能分析数据</p></div></div></div>
+  </div>
+</div>
+{% endblock %}

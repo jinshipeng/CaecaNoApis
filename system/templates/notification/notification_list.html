@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}通知消息{% endblock %}
+{% block content %}
+<div class="container-fluid mt-3">
+  <h4>通知消息</h4>
+  <div class="alert alert-info">此页面由Vue3前端渲染，如看到此说明请通过前端访问</div>
+  <table class="table table-bordered table-striped mt-3">
+    <thead class="table-light"><tr><th>ID</th><th>标题</th><th>内容</th><th>通知时间</th><th>状态</th><th>操作</th></tr></thead>
+    <tbody><tr><td colspan="6" class="text-center text-muted">数据加载中...</td></tr></tbody>
+  </table>
+</div>
+{% endblock %}

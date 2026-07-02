@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}删除确认 - 客户{% endblock %}
+{% block content %}
+<div class="container-fluid mt-3">
+  <h4>删除确认</h4>
+  <div class="alert alert-warning">此页面由Vue3前端渲染，如看到此说明请通过前端访问</div>
+  <div class="card mt-3"><div class="card-body">
+    <p class="text-danger">确定要删除该客户吗？此操作不可恢复。</p>
+    <form method="post">{% csrf_token %}
+      <button type="submit" class="btn btn-danger">确认删除</button>
+      <a href="#" class="btn btn-secondary">取消</a>
+    </form>
+  </div></div>
+</div>
+{% endblock %}
