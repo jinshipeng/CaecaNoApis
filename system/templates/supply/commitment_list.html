@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}供应商承诺列表{% endblock %}
+{% block content %}
+<div class="container-fluid mt-3">
+  <h4>供应商承诺列表</h4>
+  <div class="alert alert-info">此页面由Vue3前端渲染，如看到此说明请通过前端访问</div>
+  <table class="table table-bordered table-striped mt-3">
+    <thead class="table-light"><tr><th>ID</th><th>采购单号</th><th>供应商</th><th>承诺交期</th><th>承诺数量</th><th>状态</th><th>操作</th></tr></thead>
+    <tbody><tr><td colspan="7" class="text-center text-muted">数据加载中...</td></tr></tbody>
+  </table>
+</div>
+{% endblock %}

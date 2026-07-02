@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}物料列表{% endblock %}
+{% block content %}
+<div class="container-fluid mt-3">
+  <h4>物料列表</h4>
+  <div class="alert alert-info">此页面由Vue3前端渲染，如看到此说明请通过前端访问</div>
+  <table class="table table-bordered table-striped mt-3">
+    <thead class="table-light"><tr><th>物料编码</th><th>物料名称</th><th>规格型号</th><th>单位</th><th>类别</th><th>状态</th><th>操作</th></tr></thead>
+    <tbody><tr><td colspan="7" class="text-center text-muted">数据加载中...</td></tr></tbody>
+  </table>
+</div>
+{% endblock %}

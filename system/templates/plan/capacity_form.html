@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}产能表单{% endblock %}
+{% block content %}
+<div class="container-fluid mt-3">
+  <h4>产能表单</h4>
+  <div class="alert alert-info">此页面由Vue3前端渲染，如看到此说明请通过前端访问</div>
+  <div class="card mt-3"><div class="card-body">
+    <form method="post">{% csrf_token %}
+      <div class="mb-3"><label>产线名称</label><input name="line_name" class="form-control"></div>
+      <div class="mb-3"><label>产能上限</label><input name="max_capacity" type="number" class="form-control"></div>
+      <div class="mb-3"><label>单位</label><input name="unit" class="form-control"></div>
+      <div class="mb-3"><label>状态</label><select name="status" class="form-select"><option value="">请选择</option></select></div>
+      <button type="submit" class="btn btn-primary">保存</button>
+    </form>
+  </div></div>
+</div>
+{% endblock %}

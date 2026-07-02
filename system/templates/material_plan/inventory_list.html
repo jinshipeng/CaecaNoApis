@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}库存列表{% endblock %}
+{% block content %}
+<div class="container-fluid mt-3">
+  <h4>库存列表</h4>
+  <div class="alert alert-info">此页面由Vue3前端渲染，如看到此说明请通过前端访问</div>
+  <table class="table table-bordered table-striped mt-3">
+    <thead class="table-light"><tr><th>物料编码</th><th>物料名称</th><th>当前库存</th><th>安全库存</th><th>可用库存</th><th>仓库</th></tr></thead>
+    <tbody><tr><td colspan="6" class="text-center text-muted">数据加载中...</td></tr></tbody>
+  </table>
+</div>
+{% endblock %}

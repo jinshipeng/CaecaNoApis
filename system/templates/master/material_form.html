@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}物料表单{% endblock %}
+{% block content %}
+<div class="container-fluid mt-3">
+  <h4>物料表单</h4>
+  <div class="alert alert-info">此页面由Vue3前端渲染，如看到此说明请通过前端访问</div>
+  <div class="card mt-3"><div class="card-body">
+    <form method="post">{% csrf_token %}
+      <div class="mb-3"><label>物料编码</label><input name="code" class="form-control"></div>
+      <div class="mb-3"><label>物料名称</label><input name="name" class="form-control"></div>
+      <div class="mb-3"><label>规格型号</label><input name="specification" class="form-control"></div>
+      <div class="mb-3"><label>单位</label><input name="unit" class="form-control"></div>
+      <div class="mb-3"><label>类别</label><input name="category" class="form-control"></div>
+      <button type="submit" class="btn btn-primary">保存</button>
+    </form>
+  </div></div>
+</div>
+{% endblock %}
